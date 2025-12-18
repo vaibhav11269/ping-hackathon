@@ -68,12 +68,10 @@ app.post("/slack/ai-summary", async (req, res) => {
             }
         );
 
-        console.log("conversations.open:", dmRes.data);
-
         if (!dmRes.data.ok) {
             console.error("Error opening DM:", dmRes.data.error);
         }
-        const dmChannelId = dmRes.data.channel.id;
+        const dmChannelId = dmRes?.data?.channel?.id;
         const reply = await axios.post(
             "https://slack.com/api/chat.postMessage",
             {
@@ -88,7 +86,6 @@ app.post("/slack/ai-summary", async (req, res) => {
                 },
             }
         );
-        console.log(reply)
     } catch (err) {
         console.error("Error in /slack/ai-summary:", err.response?.data || err.message);
         // Can't change the initial response now, but you can optionally
