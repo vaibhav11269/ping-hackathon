@@ -41,7 +41,7 @@ app.post("/slack/ai-summary", async (req, res) => {
 
         // ---- 1) Call the model with the input text ----
 
-        const summary = await axios.post(
+        const response = await axios.post(
             process.env.AI_AGENT_URI,
             {
                 "class": "start",
@@ -57,7 +57,7 @@ app.post("/slack/ai-summary", async (req, res) => {
                 },
             }
         )
-        console.log(summary.data.content);
+        const summary = response?.data?.content || "";
         // ---- 2) Send the summary back to Slack as a normal channel message ----
         await axios.post(
             "https://slack.com/api/chat.postMessage",
