@@ -76,7 +76,7 @@ app.post("/slack/ai-summary", async (req, res) => {
             "https://slack.com/api/chat.postMessage",
             {
                 channel: dmChannelId,
-                text: `*AI Summary:*\n${summary}`,
+                text: summary,
                 mrkdwn: true,
             },
             {
